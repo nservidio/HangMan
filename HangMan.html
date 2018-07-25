@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Hang Man</title>
 </head>
-<body>
-
-<button onclick="resetGame()">Start game!</button>
+<body onload="resetGame()">
 
 <h1>Hang Man</h1>
 
@@ -14,7 +12,7 @@
 <h2>Wrong Guesses:</h2>
 <h2 id="wrongGuesses"></h2>
 
-<img src="images/hang_man_1.png" alt="Hang Man" id="hangManImage" width="640" height="480">
+<img src="images/hang_man_1.png" alt="Hang Man" id="hangManImage" width="320" height="240">
 
 <h1 id="wordHeader">----------</h1>
 
@@ -24,9 +22,10 @@
     <br><br>
     <input type="button" id="submitButton" onclick="submitGuess()" value="Submit" disabled>
 </form>
+<br><br>
+<button onclick="resetGame()">Reset game</button>
 
 <script>
-
     function resetGame() {
         setupData();
         setupUI();
@@ -61,18 +60,25 @@
             handleGuess(guess);
         }
         updateUI();
-        // FIXME: Still not seeing the last image.
         checkAndHandleIfGameOver();
     }
 
     function checkAndHandleIfGameOver() {
         if (wonGame()) {
-            showWonGame();
-            resetGame();
+            window.setTimeout(handleWonGame, 501);
         } else if (lostGame()) {
-            showLostGame();
-            resetGame();
+            window.setTimeout(handleLostGame, 501);
         }
+    }
+
+    function handleWonGame() {
+        showWonGame();
+        resetGame();
+    }
+
+    function handleLostGame() {
+        showLostGame();
+        resetGame();
     }
 
     function wonGame() {
@@ -167,7 +173,7 @@
     }
 
     function pickRandomWordFromList() {
-        const randomWordList = ["cat", "dog", "foo", "bar"];
+        const randomWordList = ["cat", "dog"];
         const randomWord = randomWordList[Math.floor(Math.random() * randomWordList.length)];
         return randomWord;
     }
