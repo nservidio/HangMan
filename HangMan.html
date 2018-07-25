@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Hang Man</title>
 </head>
-<body onload="resetGame()">
+<body>
+
+<button onclick="resetGame()">Start game!</button>
 
 <h1>Hang Man</h1>
+
+<h1 id="wrongGuesses"></h1>
 
 <img src="cat.jpg" alt="Cat" width="750" height="420">
 
@@ -14,19 +18,12 @@
 
 <form>
     Guess a letter:<br>
-    <input type="text" name="letter" value="">
+    <input type="text" id="textField" name="letter" value="">
     <br><br>
     <input type="submit" onclick="submitGuess()" value="Submit">
 </form>
 
 <script>
-    function submitGuess(guess) {
-        if (guess.length > 1) {
-            // Show error.
-        } else {
-            // Handle guess.
-        }
-    }
 
     function resetGame() {
         setupData();
@@ -36,11 +33,53 @@
     function setupData() {
         generateRandomWord();
         generateGuessedWord();
-        setWrongGuesses(0);
+        setWrongGuessesString("");
     }
 
     function setupUI() {
-        wordHeader.innerText = getGuessedWord();
+        updateWordHeader();
+    }
+
+    function submitGuess() {
+        // TODO: make helper func.
+        const guess = document.getElementById("textField").value;
+        if (guess.length > 1) {
+            // Show error.
+        } else if (getWrongGuessesString().includes(guess) || getGuessedWord().includes(guess)) {
+            // Handle already guessed.
+        } else {
+            handleGuess(guess);
+        }
+        updateWordHeader();
+        updateWrongGuessesHeader()
+    }
+
+    function handleGuess(guess) {
+        if (getRandomWord().includes(guess)) {
+            handleCorrectGuess(guess);
+        } else {
+            addLetterToWrongGuesses(guess);
+        }
+    }
+
+    function handleCorrectGuess(guess) {
+        let randomWord = getRandomWord();
+        let guessedWordArray = getGuessedWord().split('');
+        for(var i=0; i<randomWord.length; i++) {
+            if (randomWord[i] === guess) {
+                guessedWordArray[i] = guess;
+            }
+        }
+        let joinedGuessedWordArray = guessedWordArray.join('');
+        setGuessedWord(joinedGuessedWordArray);
+    }
+
+    function updateWordHeader() {
+        document.getElementById("wordHeader").innerText = getGuessedWord();
+    }
+
+    function updateWrongGuessesHeader() {
+        document.getElementById("wrongGuesses").innerText = getWrongGuessesString();
     }
 
     function generateRandomWord() {
@@ -57,12 +96,10 @@
         setGuessedWord(guessedWord);
     }
 
-    function setWrongGuesses(wrongGuesses) {
-        localStorage.setItem("wrongGuesses", wrongGuesses);
-    }
-
-    function getWrongGuesses() {
-        return Number(localStorage.getItem("wrongGuesses"));
+    function pickRandomWordFromList() {
+        const randomWordList = ["cat","dog","foo","bar"];
+        const randomWord = randomWordList[Math.floor(Math.random() * randomWordList.length)];
+        return randomWord;
     }
 
     function setRandomWord(randomWord) {
@@ -81,10 +118,17 @@
         return localStorage.getItem("guessedWord");
     }
 
-    function pickRandomWordFromList() {
-        const randomWordList = ["cat","dog","foo","bar"];
-        const randomWord = randomWordList[Math.floor(Math.random() * randomWordList.length)];
-        return randomWord;
+    function setWrongGuessesString(wrongGuesses) {
+        localStorage.setItem("wrongGuessesString", wrongGuesses);
+    }
+
+    function getWrongGuessesString() {
+        return localStorage.getItem("wrongGuessesString");
+    }
+
+    function addLetterToWrongGuesses(letter) {
+        let wrongGuesses = getWrongGuessesString() + letter;
+        setWrongGuessesString(wrongGuesses);
     }
 </script>
 
