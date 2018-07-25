@@ -10,19 +10,19 @@
 
 <h1>Hang Man</h1>
 
-<!--Update id-->
+<!--Update this id to include header-->
+<h2>Wrong Guesses:</h2>
+<h2 id="wrongGuesses"></h2>
 
-<h1 id="wrongGuesses"></h1>
+<img src="images/hang_man_1.png" alt="Hang Man" id="hangManImage" width="640" height="480">
 
-<img src="images/hang_man_1.png" alt="Cat" width="750" height="420">
-
-<h1 id="wordHeader"></h1>
+<h1 id="wordHeader">----------</h1>
 
 <form>
     Guess a letter:<br>
-    <input type="text" id="textField" name="letter" value="">
+    <input type="text" id="textField" name="letter" value="" autocomplete="off">
     <br><br>
-    <input type="button" onclick="submitGuess()" value="Submit">
+    <input type="button" id="submitButton" onclick="submitGuess()" value="Submit" disabled>
 </form>
 
 <script>
@@ -39,22 +39,48 @@
     }
 
     function setupUI() {
+        updateUI();
+    }
+
+    function updateUI() {
         updateWordHeader();
+        updateWrongGuessesHeader();
+        updateHangManImage();
+        clearGuessField();
+        enableSubmitButton();
     }
 
     function submitGuess() {
         // TODO: make helper func.
         const guess = document.getElementById("textField").value;
         if (guess.length > 1) {
-            // Show error.
+            showTooManyLettersError();
         } else if (getWrongGuessesString().includes(guess) || getGuessedWord().includes(guess)) {
-            // Handle already guessed.
+            showAlreadyGuessedError();
         } else {
             handleGuess(guess);
         }
-        updateWordHeader();
-        updateWrongGuessesHeader();
-        clearGuessField();
+        updateUI();
+        // FIXME: Still not seeing the last image.
+        checkAndHandleIfGameOver();
+    }
+
+    function checkAndHandleIfGameOver() {
+        if (wonGame()) {
+            showWonGame();
+            resetGame();
+        } else if (lostGame()) {
+            showLostGame();
+            resetGame();
+        }
+    }
+
+    function wonGame() {
+        return !getGuessedWord().includes("-");
+    }
+
+    function lostGame() {
+        return getWrongGuessesString().length >= 7;
     }
 
     function handleGuess(guess) {
@@ -89,6 +115,43 @@
         document.getElementById("textField").value = "";
     }
 
+    function enableSubmitButton() {
+        document.getElementById("submitButton").disabled = false;
+    }
+
+    function updateHangManImage() {
+        let numberOfWrongGuesses = getWrongGuessesString().length;
+        var imagePath = "hang_man_1.png";
+        switch(numberOfWrongGuesses) {
+            case 0:
+                break;
+            case 1:
+                imagePath = "hang_man_2.png";
+                break;
+            case 2:
+                imagePath = "hang_man_3.png";
+                break;
+            case 3:
+                imagePath = "hang_man_4.png";
+                break;
+            case 4:
+                imagePath = "hang_man_5.png";
+                break;
+            case 5:
+                imagePath = "hang_man_6.png";
+                break;
+            case 6:
+                imagePath = "hang_man_7.png";
+                break;
+            case 7:
+                imagePath = "hang_man_8.png";
+                break;
+            default:
+        }
+        let fullPath = "images/" + imagePath;
+        document.getElementById("hangManImage").src = fullPath;
+    }
+
     function generateRandomWord() {
         const randomWord = pickRandomWordFromList();
         setRandomWord(randomWord);
@@ -104,10 +167,30 @@
     }
 
     function pickRandomWordFromList() {
-        const randomWordList = ["cat","dog","foo","bar"];
+        const randomWordList = ["cat", "dog", "foo", "bar"];
         const randomWord = randomWordList[Math.floor(Math.random() * randomWordList.length)];
         return randomWord;
     }
+
+    // Alerts
+
+    function showWonGame() {
+        window.alert("You won!");
+    }
+
+    function showLostGame() {
+        window.alert("You lost!");
+    }
+
+    function showAlreadyGuessedError() {
+        window.alert("Sorry, you already guessed that letter!");
+    }
+
+    function showTooManyLettersError() {
+        window.alert("Sorry, guess one letter at a time!");
+    }
+
+    // Properties
 
     function setRandomWord(randomWord) {
         localStorage.setItem("randomWord", randomWord);
