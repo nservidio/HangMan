@@ -19,8 +19,8 @@
       <file leaf-file-name="HangMan.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HangMan.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+            <state relative-caret-position="282">
+              <caret line="182" column="34" selection-start-line="182" selection-start-column="34" selection-end-line="182" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -142,18 +142,18 @@
       <workItem from="1532487995032" duration="574000" />
       <workItem from="1532488574993" duration="1210000" />
       <workItem from="1532489803049" duration="726000" />
-      <workItem from="1532546690061" duration="856000" />
+      <workItem from="1532546690061" duration="940000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10715000" />
+    <option name="totallyTimeSpent" value="10799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="23" width="1606" height="880" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2615193" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2615193" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.09339975" side_tool="true" visible="true" weight="0.19602978" />
@@ -161,7 +161,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.90660024" visible="true" weight="0.19602978" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.90660024" visible="true" weight="0.19602978" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -249,8 +249,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HangMan.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+        <state relative-caret-position="282">
+          <caret line="182" column="34" selection-start-line="182" selection-start-column="34" selection-end-line="182" selection-end-column="34" />
         </state>
       </provider>
     </entry>
