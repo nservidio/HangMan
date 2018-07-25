@@ -50,8 +50,7 @@
     }
 
     function submitGuess() {
-        // TODO: make helper func.
-        const guess = document.getElementById("textField").value;
+        const guess = getCurrentGuess();
         if (guess.length > 1) {
             showTooManyLettersError();
         } else if (getWrongGuessesString().includes(guess) || getGuessedWord().includes(guess)) {
@@ -225,6 +224,10 @@
     function addLetterToWrongGuesses(letter) {
         let wrongGuesses = getWrongGuessesString() + letter;
         setWrongGuessesString(wrongGuesses);
+    }
+
+    function getCurrentGuess() {
+        return document.getElementById("textField").value;
     }
 </script>
 
