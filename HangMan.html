@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Hang Man</title>
 </head>
-<body onload="generateRandomWord()">
+<body onload="resetGame()">
 
 <h1>Hang Man</h1>
 
 <img src="cat.jpg" alt="Cat" width="750" height="420">
 
-<h2 id="wordHeader">?????</h2>
+<h1 id="wordHeader"></h1>
 
 <form>
     Guess a letter:<br>
@@ -20,20 +20,41 @@
 </form>
 
 <script>
-    function submitGuess() {
-
+    function submitGuess(guess) {
+        if (guess.length > 1) {
+            // Show error.
+        } else {
+            // Handle guess.
+        }
     }
 
     function resetGame() {
+        setupData();
+        setupUI();
+    }
+
+    function setupData() {
         generateRandomWord();
+        generateGuessedWord();
         setWrongGuesses(0);
-        // TODO: Set image.
-        // set number of blanks.
+    }
+
+    function setupUI() {
+        wordHeader.innerText = getGuessedWord();
     }
 
     function generateRandomWord() {
         const randomWord = pickRandomWordFromList();
-        setRandomWord();
+        setRandomWord(randomWord);
+    }
+
+    function generateGuessedWord() {
+        var guessedWord = "";
+        const randomWord = getRandomWord();
+        for (let letter of randomWord) {
+            guessedWord = guessedWord + "-";
+        }
+        setGuessedWord(guessedWord);
     }
 
     function setWrongGuesses(wrongGuesses) {
@@ -49,7 +70,15 @@
     }
 
     function getRandomWord() {
-        return localStorage.getItem("randomWord")
+        return localStorage.getItem("randomWord");
+    }
+
+    function setGuessedWord(guessedWord) {
+        localStorage.setItem("guessedWord", guessedWord);
+    }
+
+    function getGuessedWord() {
+        return localStorage.getItem("guessedWord");
     }
 
     function pickRandomWordFromList() {
