@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hang Man</title>
+</head>
+<body onload="generateRandomWord()">
+
+<h1>Hang Man</h1>
+
+<img src="cat.jpg" alt="Cat" width="750" height="420">
+
+<h2 id="wordHeader">?????</h2>
+
+<form>
+    Guess a letter:<br>
+    <input type="text" name="letter" value="">
+    <br><br>
+    <input type="submit" onclick="submitGuess()" value="Submit">
+</form>
+
+<script>
+    function submitGuess() {
+
+    }
+
+    function resetGame() {
+        generateRandomWord();
+        setWrongGuesses(0);
+        // TODO: Set image.
+        // set number of blanks.
+    }
+
+    function generateRandomWord() {
+        const randomWord = pickRandomWordFromList();
+        setRandomWord();
+    }
+
+    function setWrongGuesses(wrongGuesses) {
+        localStorage.setItem("wrongGuesses", wrongGuesses);
+    }
+
+    function getWrongGuesses() {
+        return Number(localStorage.getItem("wrongGuesses"));
+    }
+
+    function setRandomWord(randomWord) {
+        localStorage.setItem("randomWord", randomWord);
+    }
+
+    function getRandomWord() {
+        return localStorage.getItem("randomWord")
+    }
+
+    function pickRandomWordFromList() {
+        const randomWordList = ["cat","dog","foo","bar"];
+        const randomWord = randomWordList[Math.floor(Math.random() * randomWordList.length)];
+        return randomWord;
+    }
+</script>
+
+</body>
+</html>
