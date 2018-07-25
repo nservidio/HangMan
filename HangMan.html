@@ -10,6 +10,8 @@
 
 <h1>Hang Man</h1>
 
+<!--Update id-->
+
 <h1 id="wrongGuesses"></h1>
 
 <img src="cat.jpg" alt="Cat" width="750" height="420">
@@ -20,7 +22,7 @@
     Guess a letter:<br>
     <input type="text" id="textField" name="letter" value="">
     <br><br>
-    <input type="submit" onclick="submitGuess()" value="Submit">
+    <input type="button" onclick="submitGuess()" value="Submit">
 </form>
 
 <script>
@@ -51,7 +53,8 @@
             handleGuess(guess);
         }
         updateWordHeader();
-        updateWrongGuessesHeader()
+        updateWrongGuessesHeader();
+        clearGuessField();
     }
 
     function handleGuess(guess) {
@@ -80,6 +83,10 @@
 
     function updateWrongGuessesHeader() {
         document.getElementById("wrongGuesses").innerText = getWrongGuessesString();
+    }
+
+    function clearGuessField() {
+        document.getElementById("textField").value = "";
     }
 
     function generateRandomWord() {
