@@ -50,7 +50,7 @@
     }
 
     function submitGuess() {
-        const guess = getCurrentGuess();
+        const guess = getCurrentGuess().toLowerCase();
         if (guess.length > 1) {
             showTooManyLettersError();
         } else if (getWrongGuessesString().includes(guess) || getGuessedWord().includes(guess)) {
@@ -89,7 +89,7 @@
     }
 
     function handleGuess(guess) {
-        if (getRandomWord().includes(guess)) {
+        if (getRandomWord().includes(guess.toLowerCase())) {
             handleCorrectGuess(guess);
         } else {
             addLetterToWrongGuesses(guess);
